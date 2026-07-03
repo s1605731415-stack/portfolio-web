@@ -27,4 +27,13 @@ describe("Header", () => {
     await user.click(screen.getByRole("button", { name: /close menu/i }));
     expect(screen.getByTestId("mobile-menu")).toHaveAttribute("data-open", "false");
   });
+
+  it("toggles the document theme", async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+
+    expect(document.documentElement.dataset.theme).toBe("light");
+    await user.click(screen.getByRole("button", { name: /toggle theme/i }));
+    expect(document.documentElement.dataset.theme).toBe("dark");
+  });
 });

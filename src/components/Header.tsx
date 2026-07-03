@@ -5,14 +5,32 @@ import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
 import { navigationItems } from "../data/navigation";
+import { getActiveSectionId } from "../lib/section-observer";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [activeSection, setActiveSection] = useState("top");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
+
+  useEffect(() => {
+    function updateActiveSection() {
+      const sections = Array.from(document.querySelectorAll("[data-section]"));
+      setActiveSection(getActiveSectionId(sections, window.innerHeight * 0.42));
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--line)]/70 bg-[var(--surface)]/90 backdrop-blur-xl">
@@ -23,7 +41,9 @@ export function Header() {
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
           {navigationItems.map((item) => (
             <Link
-              className="rounded-lg px-3 py-2 text-sm font-medium text-[var(--muted)] transition hover:bg-[var(--soft)] hover:text-[var(--text)]"
+              className={`rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-[var(--soft)] hover:text-[var(--text)] ${
+                activeSection === item.href.replace("#", "") ? "bg-[var(--soft)] text-[var(--text)]" : "text-[var(--muted)]"
+              }`}
               href={item.href}
               key={item.href}
             >

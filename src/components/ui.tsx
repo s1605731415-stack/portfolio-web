@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { GsapReveal } from "./GsapReveal";
 
 type ButtonLinkProps = {
   href: string;
@@ -41,12 +42,14 @@ export function SectionShell({
 }) {
   return (
     <section id={id} data-section={id} className={`mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:py-28 ${className}`}>
-      <div className="mb-10 max-w-3xl">
-        {eyebrow ? <p className="mb-3 text-sm font-medium text-[var(--accent)]">{eyebrow}</p> : null}
-        <h2 className="text-3xl font-semibold tracking-normal text-[var(--text)] sm:text-4xl">{title}</h2>
-        {description ? <p className="mt-4 text-base leading-7 text-[var(--muted)] sm:text-lg">{description}</p> : null}
-      </div>
-      {children}
+      <GsapReveal>
+        <div className="mb-10 max-w-3xl">
+          {eyebrow ? <p className="mb-3 text-sm font-medium text-[var(--accent)]">{eyebrow}</p> : null}
+          <h2 className="text-3xl font-semibold tracking-normal text-[var(--text)] sm:text-4xl">{title}</h2>
+          {description ? <p className="mt-4 text-base leading-7 text-[var(--muted)] sm:text-lg">{description}</p> : null}
+        </div>
+      </GsapReveal>
+      <GsapReveal>{children}</GsapReveal>
     </section>
   );
 }
