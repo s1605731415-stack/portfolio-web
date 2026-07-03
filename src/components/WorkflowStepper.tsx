@@ -57,7 +57,7 @@ export function WorkflowStepper() {
       <div className="sticky top-24 h-fit rounded-lg border border-[var(--line)] bg-[var(--text)] p-5 text-[var(--bg-strong)] shadow-card">
         <div className="rounded-lg border border-white/10 bg-white/8 p-5">
           <p className="text-sm text-white/60">Workflow Board</p>
-          <div className="mt-6 rounded-lg bg-white/10 p-4">
+          <div className="mt-6 rounded-lg bg-white/10 p-4" data-testid="workflow-active-stage">
             <p className="text-xs uppercase text-white/50">Active stage</p>
             <h3 className="mt-2 text-3xl font-semibold">{workflowSteps[active].title}</h3>
             <p className="mt-4 leading-7 text-white/70">{workflowSteps[active].description}</p>
