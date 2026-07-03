@@ -125,6 +125,7 @@ export const uiCopy = {
 } as const;
 
 type ProjectTranslation = {
+  title: string;
   type: string;
   summary: string;
   imageLabel: string;
@@ -134,6 +135,7 @@ type ProjectTranslation = {
 
 const zhProjectCopy: Record<string, ProjectTranslation> = {
   "awak-health-app": {
+    title: "AWAK 智能健康 App",
     type: "智能健康 / 移动端 UX",
     summary: "一个移动健康产品概念，将复杂健康数据、日常习惯和 AI 辅助建议整理成更清晰的用户体验。",
     imageLabel: "移动健康 App 预览",
@@ -148,6 +150,7 @@ const zhProjectCopy: Record<string, ProjectTranslation> = {
     },
   },
   "awak-website": {
+    title: "AWAK 官方网站",
     type: "品牌官网 / 产品叙事",
     summary: "AWAK 官网方向，通过结构化叙事和可信的视觉模块解释智能健康产品价值。",
     imageLabel: "健康官网 Hero 与模块预览",
@@ -162,6 +165,7 @@ const zhProjectCopy: Record<string, ProjectTranslation> = {
     },
   },
   "ai-prompt-video-site": {
+    title: "AI 提示词与视频生成网站",
     type: "AI 工具 / Web 产品",
     summary: "面向提示词探索和 AI 视频生成的网站概念，围绕创建步骤、提示词质量和结果审阅组织体验。",
     imageLabel: "AI 提示词工作台预览",
@@ -176,6 +180,7 @@ const zhProjectCopy: Record<string, ProjectTranslation> = {
     },
   },
   "ai-ux-workflow": {
+    title: "AI 辅助 UX 工作流",
     type: "设计流程 / AI 工作流",
     summary: "一个记录 AI 如何支持研究整理、提示词迭代、原型、测试和前端交付的工作流项目。",
     imageLabel: "AI 工作流步骤预览",
@@ -190,6 +195,7 @@ const zhProjectCopy: Record<string, ProjectTranslation> = {
     },
   },
   "xingshu-ai-platform": {
+    title: "Xingshu AI 平台",
     type: "AI 平台 / 商业项目",
     summary: "商业 AI 平台体验，将复杂产品能力整理成更清晰的导航、任务路径和可用界面模块。",
     imageLabel: "AI 平台看板预览",
@@ -204,6 +210,7 @@ const zhProjectCopy: Record<string, ProjectTranslation> = {
     },
   },
   "ant-health-commercial": {
+    title: "Ant Health 商业项目",
     type: "健康 / 商业 UX",
     summary: "健康相关商业项目归档，展示服务场景、业务要求和移动/Web 触点中的实际设计经验。",
     imageLabel: "商业健康体验预览",
@@ -233,7 +240,7 @@ export function getProjectCopy(project: Project, language: Language) {
 
   const zh = zhProjectCopy[project.slug];
   return {
-    title: project.title,
+    title: zh.title,
     type: zh.type,
     summary: zh.summary,
     imageLabel: zh.imageLabel,

@@ -41,7 +41,7 @@ export function SectionShell({
   className?: string;
 }) {
   return (
-    <section id={id} data-section={id} className={`mx-auto w-full max-w-[1800px] border-t border-[var(--line)] px-6 py-20 sm:px-10 lg:py-28 ${className}`}>
+    <section id={id} data-section={id} className={`mx-auto w-full scroll-mt-28 max-w-[1800px] border-t border-[var(--line)] px-6 py-20 sm:px-10 lg:py-28 ${className}`}>
       <GsapReveal>
         <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div className="max-w-4xl">

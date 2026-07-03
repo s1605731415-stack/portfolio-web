@@ -17,32 +17,30 @@ describe("Header", () => {
   it("renders the approved navigation labels and controls", () => {
     renderHeader();
 
-    expect(screen.getByRole("link", { name: "Sun Wang Portfolio" })).toBeInTheDocument();
-    const primaryNav = screen.getByRole("navigation", { name: /primary navigation/i });
-    for (const label of ["Work", "Method", "AI Workflow", "System", "Archive", "About", "Contact"]) {
-      expect(within(primaryNav).getByRole("link", { name: label })).toBeInTheDocument();
-    }
-    expect(screen.getByRole("button", { name: /toggle theme/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Sun Wang 作品集" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /open menu/i })).toBeInTheDocument();
   });
 
-  it("opens and closes the mobile menu", async () => {
+  it("opens and closes the stage menu", async () => {
     const user = userEvent.setup();
     renderHeader();
 
     await user.click(screen.getByRole("button", { name: /open menu/i }));
     expect(screen.getByTestId("mobile-menu")).toHaveAttribute("data-open", "true");
+    const primaryNav = screen.getByRole("navigation", { name: /primary navigation/i });
+    for (const label of ["作品", "方法", "AI 工作流", "系统", "关于", "联系"]) {
+      expect(within(primaryNav).getByRole("link", { name: label })).toBeInTheDocument();
+    }
 
-    await user.click(screen.getByRole("button", { name: /close menu/i }));
+    await user.click(screen.getAllByRole("button", { name: /close menu/i })[0]);
     expect(screen.getByTestId("mobile-menu")).toHaveAttribute("data-open", "false");
   });
 
-  it("toggles the document theme", async () => {
+  it("switches the document language", async () => {
     const user = userEvent.setup();
     renderHeader();
 
-    expect(document.documentElement.dataset.theme).toBe("light");
-    await user.click(screen.getByRole("button", { name: /toggle theme/i }));
-    expect(document.documentElement.dataset.theme).toBe("dark");
+    await user.click(screen.getByRole("button", { name: "Switch language to en" }));
+    expect(document.documentElement.lang).toBe("en");
   });
 });

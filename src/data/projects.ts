@@ -12,6 +12,11 @@ export type Project = {
   tags: string[];
   imageLabel: string;
   accent: "blue" | "green" | "graphite" | "violet";
+  media: {
+    hero: string;
+    thumb: string;
+    alt: string;
+  };
   caseStudy: CaseStudySection[];
 };
 
@@ -65,6 +70,11 @@ export const projects: Project[] = [
     tags: ["Health Tech", "Mobile UX", "AI Guidance", "Design System"],
     imageLabel: "Mobile health app preview",
     accent: "green",
+    media: {
+      hero: "/images/projects/awak-health.png",
+      thumb: "/images/projects/awak-health.png",
+      alt: "AWAK 智能健康 App 的移动端健康数据界面和生命体征可视化",
+    },
     caseStudy: caseStudy(
       "AWAK is positioned as a health companion that helps users understand signals, routines, and next steps without overwhelming them.",
       "The challenge was to make health information feel actionable while avoiding a dashboard that only exposes data without context.",
@@ -84,6 +94,11 @@ export const projects: Project[] = [
     tags: ["Website", "Health Brand", "Product Narrative", "Responsive"],
     imageLabel: "Health website hero and modules",
     accent: "blue",
+    media: {
+      hero: "/images/projects/awak-health.png",
+      thumb: "/images/projects/awak-health.png",
+      alt: "AWAK 健康产品网站的产品叙事视觉和健康界面模块",
+    },
     caseStudy: caseStudy(
       "The website introduces AWAK as a credible intelligent health product and translates product complexity into visitor-friendly sections.",
       "The main problem was balancing trust, explanation, and product clarity without relying on generic health-tech visuals.",
@@ -103,6 +118,11 @@ export const projects: Project[] = [
     tags: ["AI Tool", "Web Product", "Prompt UX", "Creation Flow"],
     imageLabel: "AI prompt workspace preview",
     accent: "violet",
+    media: {
+      hero: "/images/projects/ai-workflow.png",
+      thumb: "/images/projects/ai-workflow.png",
+      alt: "AI 提示词与视频生成工具的创作工作台和浮动界面",
+    },
     caseStudy: caseStudy(
       "This concept organizes prompt writing, generation settings, and video review into a practical creation workspace.",
       "AI tools often expose powerful controls without helping users understand sequence, intent, or result quality.",
@@ -122,6 +142,11 @@ export const projects: Project[] = [
     tags: ["AI Workflow", "UX Strategy", "Prototyping", "Handoff"],
     imageLabel: "AI workflow stepper preview",
     accent: "graphite",
+    media: {
+      hero: "/images/projects/ai-workflow.png",
+      thumb: "/images/projects/ai-workflow.png",
+      alt: "AI 辅助 UX 工作流的研究、提示词和原型设计场景",
+    },
     caseStudy: caseStudy(
       "This project explains how AI fits into a practical UX workflow rather than treating AI as a visual trend.",
       "The problem was making AI contribution concrete: what it helps with, where judgment matters, and how outputs become design decisions.",
@@ -141,6 +166,11 @@ export const projects: Project[] = [
     tags: ["AI Platform", "B2B UX", "Navigation", "Commercial"],
     imageLabel: "AI platform dashboard preview",
     accent: "blue",
+    media: {
+      hero: "/images/projects/design-system.png",
+      thumb: "/images/projects/design-system.png",
+      alt: "AI 平台与设计系统交付的深色组件界面和代码示例",
+    },
     caseStudy: caseStudy(
       "Xingshu AI Platform represents commercial product experience across AI capability discovery, workflow navigation, and interface systems.",
       "The platform needed to expose complex capabilities without making first-time users feel lost or overloaded.",
@@ -160,6 +190,11 @@ export const projects: Project[] = [
     tags: ["Health", "Commercial UX", "Service Flow", "Mobile Web"],
     imageLabel: "Commercial health experience preview",
     accent: "green",
+    media: {
+      hero: "/images/projects/commercial-archive.png",
+      thumb: "/images/projects/commercial-archive.png",
+      alt: "商业项目归档的移动界面、服务蓝图和品牌触点组合",
+    },
     caseStudy: caseStudy(
       "This archive case shows applied health and service design experience in a commercial environment.",
       "The challenge was balancing user clarity, business requirements, and implementation constraints across real product surfaces.",

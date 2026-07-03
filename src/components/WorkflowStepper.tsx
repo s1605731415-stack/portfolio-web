@@ -19,7 +19,7 @@ export function WorkflowStepper() {
   useGSAP(
     () => {
       const root = ref.current;
-      if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (!root || window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
         return;
       }
 

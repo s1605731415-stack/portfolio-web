@@ -14,7 +14,7 @@ export function GsapReveal({ children, className = "" }: { children: ReactNode; 
   useGSAP(
     () => {
       const element = ref.current;
-      if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (!element || window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
         return;
       }
 
