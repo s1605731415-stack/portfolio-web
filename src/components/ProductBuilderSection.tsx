@@ -1,8 +1,15 @@
+"use client";
+
+import { uiCopy } from "../data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { SectionShell } from "./ui";
 
 export function ProductBuilderSection() {
+  const { language } = useLanguage();
+  const copy = uiCopy[language];
+
   return (
-    <SectionShell id="builder" title="From UI Designer to Product Builder" description="I do not position myself as a frontend engineer. I use frontend awareness to make design decisions clearer, more realistic, and easier to deliver.">
+    <SectionShell id="builder" title={copy.builderTitle} description={copy.builderDescription}>
       <div className="grid gap-5 lg:grid-cols-3">
         {["Problem judgment", "Interface logic", "Delivery awareness"].map((title) => (
           <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-6 shadow-soft" key={title}>

@@ -1,3 +1,7 @@
+"use client";
+
+import { uiCopy } from "../data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { SectionShell } from "./ui";
 
 const methods = [
@@ -8,8 +12,11 @@ const methods = [
 ];
 
 export function CaseStudyMethodSection() {
+  const { language } = useLanguage();
+  const copy = uiCopy[language];
+
   return (
-    <SectionShell id="method" title="How I Build Case Studies" description="My case studies are structured to show judgment: what problem matters, why the solution is shaped that way, and how design moves toward implementation.">
+    <SectionShell id="method" title={copy.methodTitle} description={copy.methodDescription}>
       <div className="grid gap-4 md:grid-cols-4">
         {methods.map(([title, description], index) => (
           <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-5 shadow-soft" key={title}>

@@ -1,8 +1,15 @@
+"use client";
+
+import { uiCopy } from "../data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { SectionShell } from "./ui";
 
 export function DesignSystemSection() {
+  const { language } = useLanguage();
+  const copy = uiCopy[language];
+
   return (
-    <SectionShell id="system" title="Design System & Frontend Handoff" description="I use system thinking to connect visual consistency, interaction states, responsive behavior, and build-ready documentation.">
+    <SectionShell id="system" title={copy.systemTitle} description={copy.systemDescription}>
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-6 shadow-soft">
           <h3 className="text-xl font-semibold">Token Panel</h3>

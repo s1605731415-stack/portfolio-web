@@ -3,12 +3,21 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { Header } from "../Header";
+import { LanguageProvider } from "../LanguageProvider";
+
+function renderHeader() {
+  return render(
+    <LanguageProvider>
+      <Header />
+    </LanguageProvider>,
+  );
+}
 
 describe("Header", () => {
   it("renders the approved navigation labels and controls", () => {
-    render(<Header />);
+    renderHeader();
 
-    expect(screen.getByRole("link", { name: "Sun Wang" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Sun Wang Portfolio" })).toBeInTheDocument();
     const primaryNav = screen.getByRole("navigation", { name: /primary navigation/i });
     for (const label of ["Work", "Method", "AI Workflow", "System", "Archive", "About", "Contact"]) {
       expect(within(primaryNav).getByRole("link", { name: label })).toBeInTheDocument();
@@ -19,7 +28,7 @@ describe("Header", () => {
 
   it("opens and closes the mobile menu", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    renderHeader();
 
     await user.click(screen.getByRole("button", { name: /open menu/i }));
     expect(screen.getByTestId("mobile-menu")).toHaveAttribute("data-open", "true");
@@ -30,7 +39,7 @@ describe("Header", () => {
 
   it("toggles the document theme", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    renderHeader();
 
     expect(document.documentElement.dataset.theme).toBe("light");
     await user.click(screen.getByRole("button", { name: /toggle theme/i }));

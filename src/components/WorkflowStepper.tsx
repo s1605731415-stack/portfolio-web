@@ -5,10 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useState } from "react";
 import { workflowSteps } from "../data/projects";
+import { uiCopy } from "../data/translations";
+import { useLanguage } from "./LanguageProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function WorkflowStepper() {
+  const { language } = useLanguage();
+  const copy = uiCopy[language];
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -38,10 +42,10 @@ export function WorkflowStepper() {
       <div className="space-y-3">
         {workflowSteps.map((step, index) => (
           <button
-            className={`w-full rounded-lg border p-5 text-left shadow-soft transition ${
+            className={`w-full rounded-lg border-2 p-5 text-left shadow-soft transition ${
               active === index
-                ? "border-[var(--accent)] bg-[var(--bg-strong)]"
-                : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--accent)]"
+                ? "border-[var(--text)] bg-[var(--bg-strong)]"
+                : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--text)]"
             }`}
             data-workflow-step
             key={step.title}
@@ -49,17 +53,17 @@ export function WorkflowStepper() {
             type="button"
           >
             <p className="text-sm font-semibold text-[var(--accent)]">0{index + 1}</p>
-            <h3 className="mt-2 text-2xl font-semibold">{step.title}</h3>
-            <p className="mt-3 leading-7 text-[var(--muted)]">{step.description}</p>
+            <h3 className="mt-2 text-4xl font-black uppercase leading-none tracking-[-0.07em]">{step.title}</h3>
+            <p className="mt-3 font-bold leading-7 text-[var(--muted)]">{step.description}</p>
           </button>
         ))}
       </div>
-      <div className="sticky top-24 h-fit rounded-lg border border-[var(--line)] bg-[var(--text)] p-5 text-[var(--bg-strong)] shadow-card">
+      <div className="sticky top-24 h-fit rounded-lg border-2 border-[var(--text)] bg-[var(--text)] p-5 text-[var(--bg)] shadow-card">
         <div className="rounded-lg border border-white/10 bg-white/8 p-5">
           <p className="text-sm text-white/60">Workflow Board</p>
           <div className="mt-6 rounded-lg bg-white/10 p-4" data-testid="workflow-active-stage">
-            <p className="text-xs uppercase text-white/50">Active stage</p>
-            <h3 className="mt-2 text-3xl font-semibold">{workflowSteps[active].title}</h3>
+            <p className="text-xs uppercase text-white/50">{copy.activeStage}</p>
+            <h3 className="mt-2 text-5xl font-black uppercase leading-none tracking-[-0.08em]">{workflowSteps[active].title}</h3>
             <p className="mt-4 leading-7 text-white/70">{workflowSteps[active].description}</p>
           </div>
           <div className="mt-5 grid gap-3">

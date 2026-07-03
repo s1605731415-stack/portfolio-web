@@ -10,9 +10,9 @@ type ButtonLinkProps = {
 
 export function ButtonLink({ href, children, variant = "primary" }: ButtonLinkProps) {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-lg px-5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]";
+    "inline-flex min-h-11 items-center justify-center rounded-lg px-5 text-sm font-extrabold tracking-[-0.03em] transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]";
   const variants = {
-    primary: "bg-[var(--text)] text-[var(--bg-strong)] hover:-translate-y-0.5 hover:shadow-card",
+    primary: "bg-[var(--text)] text-[var(--bg)] hover:-translate-y-0.5 hover:shadow-card",
     secondary:
       "border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:-translate-y-0.5 hover:border-[var(--text)]",
     ghost: "text-[var(--muted)] hover:bg-[var(--soft)] hover:text-[var(--text)]",
@@ -41,12 +41,16 @@ export function SectionShell({
   className?: string;
 }) {
   return (
-    <section id={id} data-section={id} className={`mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 lg:py-28 ${className}`}>
+    <section id={id} data-section={id} className={`mx-auto w-full max-w-[1800px] border-t border-[var(--line)] px-6 py-20 sm:px-10 lg:py-28 ${className}`}>
       <GsapReveal>
-        <div className="mb-10 max-w-3xl">
-          {eyebrow ? <p className="mb-3 text-sm font-medium text-[var(--accent)]">{eyebrow}</p> : null}
-          <h2 className="text-3xl font-semibold tracking-normal text-[var(--text)] sm:text-4xl">{title}</h2>
-          {description ? <p className="mt-4 text-base leading-7 text-[var(--muted)] sm:text-lg">{description}</p> : null}
+        <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+          <div className="max-w-4xl">
+            {eyebrow ? <p className="mb-3 text-sm font-black uppercase text-[var(--accent)]">{eyebrow}</p> : null}
+            <h2 className="text-[clamp(2.8rem,7vw,7rem)] font-black uppercase leading-[0.88] tracking-[-0.07em] text-[var(--text)]">
+              {title}
+            </h2>
+          </div>
+          {description ? <p className="max-w-xl text-base font-bold leading-7 text-[var(--muted)] sm:text-lg">{description}</p> : null}
         </div>
       </GsapReveal>
       <GsapReveal>{children}</GsapReveal>
@@ -56,7 +60,7 @@ export function SectionShell({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--muted)]">
+    <span className="inline-flex items-center rounded-md border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-xs font-extrabold uppercase tracking-[-0.02em] text-[var(--muted)]">
       {children}
     </span>
   );
@@ -71,9 +75,9 @@ export function PlaceholderImage({ label, accent = "blue" }: { label: string; ac
   }[accent];
 
   return (
-    <div className={`relative min-h-56 overflow-hidden rounded-lg border border-[var(--line)] bg-gradient-to-br ${accentClass} p-4`}>
-      <div className="absolute right-4 top-4 h-20 w-20 rounded-full border border-white/70 bg-white/50 blur-sm" />
-      <div className="relative grid h-full min-h-48 grid-rows-[auto_1fr_auto] gap-4 rounded-lg border border-white/70 bg-white/72 p-4 shadow-soft backdrop-blur">
+    <div className={`relative min-h-56 overflow-hidden rounded-lg border-2 border-[var(--text)] bg-gradient-to-br ${accentClass} p-4 grayscale`}>
+      <div className="absolute inset-0 mono-grid" />
+      <div className="relative grid h-full min-h-48 grid-rows-[auto_1fr_auto] gap-4 rounded-lg border border-[var(--line)] bg-[var(--bg-strong)]/80 p-4 shadow-soft backdrop-blur">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#ffd166]" />

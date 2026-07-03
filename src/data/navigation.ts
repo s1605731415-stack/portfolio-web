@@ -1,5 +1,5 @@
 export type NavigationItem = {
-  label: string;
+  label: "Work" | "Method" | "AI Workflow" | "System" | "Archive" | "About" | "Contact";
   href: string;
 };
 
