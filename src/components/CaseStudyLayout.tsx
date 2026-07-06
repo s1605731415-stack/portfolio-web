@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BarChart3, Pause, Play, Volume2, X } from "lucide-react";
+import { ArrowLeft, BarChart3, Layers, X } from "lucide-react";
 import Link from "next/link";
 import type { Project } from "../data/projects";
 import { getProjectCopy, uiCopy } from "../data/translations";
@@ -49,7 +49,7 @@ export function CaseStudyLayout({ project }: { project: Project }) {
           <section className="mt-12 grid items-center gap-10 lg:grid-cols-[0.62fr_1fr]">
             <div>
               <p className="mb-6 flex items-center gap-3 text-sm font-black text-black/58">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#25e98a]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
                 {project.year} / {projectCopy.type}
               </p>
               <h1 className="text-[clamp(4rem,10vw,9rem)] font-black uppercase leading-[0.84] tracking-[-0.08em]">
@@ -70,7 +70,7 @@ export function CaseStudyLayout({ project }: { project: Project }) {
               <div className="absolute -bottom-6 -left-6 hidden w-48 overflow-hidden rounded-2xl border border-black/10 bg-white/75 p-2 shadow-[0_18px_50px_rgba(0,0,0,.18)] backdrop-blur lg:block">
                 <img className="aspect-[4/3] w-full rounded-xl object-cover" src="/images/projects/case-study-method.png" alt="" />
               </div>
-              <div className="absolute -right-4 -top-5 hidden rounded-2xl bg-black px-4 py-3 text-sm font-black text-[#38ff9c] shadow-[0_18px_50px_rgba(0,0,0,.28)] sm:block">
+              <div className="absolute -right-4 -top-5 hidden rounded-2xl bg-black px-4 py-3 text-sm font-black text-[var(--accent)] shadow-[0_18px_50px_rgba(0,0,0,.28)] sm:block">
                 {language === "zh" ? "继续向下" : "keep scrolling"}
               </div>
             </div>
@@ -81,7 +81,7 @@ export function CaseStudyLayout({ project }: { project: Project }) {
               {sectionCopy.slice(0, 4).map((section, index) => (
                 <section className="rounded-[1.2rem] border border-black/10 bg-white/58 p-6 shadow-[0_18px_55px_rgba(0,0,0,.08)] backdrop-blur" id={section.title.toLowerCase().replaceAll(" ", "-")} key={section.title}>
                   <p className="flex items-center gap-3 text-sm font-black text-black/42">
-                    <span className="text-[#12b86d]">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="text-[var(--accent)]">{String(index + 1).padStart(2, "0")}</span>
                     {section.displayTitle}
                   </p>
                   <p className="mt-5 text-base font-bold leading-8 text-black/62">{section.body}</p>
@@ -90,13 +90,13 @@ export function CaseStudyLayout({ project }: { project: Project }) {
             </div>
             <div className="rounded-[1.2rem] bg-black p-6 text-white shadow-[0_24px_80px_rgba(0,0,0,.22)]">
               <div className="flex items-center gap-3">
-                <BarChart3 size={20} className="text-[#38ff9c]" />
+                <BarChart3 size={20} className="text-[var(--accent)]" />
                 <h2 className="text-3xl font-black tracking-[-0.07em]">{language === "zh" ? "结果与交付" : "Outcome & Handoff"}</h2>
               </div>
               <div className="mt-7 grid gap-4">
                 {sectionCopy.slice(4).map((section) => (
                   <div className="rounded-2xl border border-white/10 bg-white/6 p-5" key={section.title}>
-                    <p className="text-sm font-black text-[#38ff9c]">{section.displayTitle}</p>
+                    <p className="text-sm font-black text-[var(--accent)]">{section.displayTitle}</p>
                     <p className="mt-3 text-sm font-bold leading-7 text-white/62">{section.body}</p>
                   </div>
                 ))}
@@ -105,26 +105,20 @@ export function CaseStudyLayout({ project }: { project: Project }) {
           </section>
 
           <div className="fixed bottom-5 left-1/2 z-40 hidden -translate-x-1/2 items-center gap-2 rounded-[1.4rem] bg-white/82 p-3 text-black shadow-[0_24px_80px_rgba(0,0,0,.22)] backdrop-blur-xl md:flex">
-            <button className="grid h-12 w-12 place-items-center rounded-full bg-black text-white" type="button" aria-label="Play">
-              <Play size={18} fill="currentColor" />
-            </button>
-            <button className="grid h-12 w-12 place-items-center rounded-full bg-black text-white" type="button" aria-label="Sound">
-              <Volume2 size={18} />
-            </button>
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-black text-white" aria-hidden="true">
+              <Layers size={18} />
+            </span>
             {[
               { label: language === "zh" ? "研究" : "Research", src: project.media.thumb },
               { label: language === "zh" ? "流程" : "Flow", src: "/images/projects/case-study-method.png" },
               { label: language === "zh" ? "界面" : "UI", src: "/images/projects/design-system.png" },
               { label: language === "zh" ? "系统" : "System", src: "/images/projects/ai-workflow.png" },
             ].map((item, index) => (
-              <a className={`block w-28 overflow-hidden rounded-xl border bg-black/5 ${index === 0 ? "border-[#25e98a]" : "border-black/8"}`} href={`#${sectionCopy[Math.min(index, sectionCopy.length - 1)].title.toLowerCase().replaceAll(" ", "-")}`} key={item.label}>
+              <a className={`block w-28 overflow-hidden rounded-xl border bg-black/5 ${index === 0 ? "border-[var(--accent)]" : "border-black/8"}`} href={`#${sectionCopy[Math.min(index, sectionCopy.length - 1)].title.toLowerCase().replaceAll(" ", "-")}`} key={item.label}>
                 <img className="h-12 w-full object-cover" src={item.src} alt="" />
                 <span className="block px-2 py-1 text-center text-xs font-black">{item.label}</span>
               </a>
             ))}
-            <button className="grid h-12 w-12 place-items-center rounded-full bg-black/8 text-black/70" type="button" aria-label="Pause">
-              <Pause size={18} />
-            </button>
           </div>
         </article>
       </main>

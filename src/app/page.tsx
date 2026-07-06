@@ -4,7 +4,6 @@ import { CaseStudyMethodSection } from "../components/CaseStudyMethodSection";
 import { ContactSection } from "../components/ContactSection";
 import { DesignSystemSection } from "../components/DesignSystemSection";
 import { Footer } from "../components/Footer";
-import { FloatingDock } from "../components/FloatingDock";
 import { Header } from "../components/Header";
 import { HeroSection } from "../components/HeroSection";
 import { PastCommercialWorkSection } from "../components/PastCommercialWorkSection";
@@ -27,7 +26,6 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
-      <FloatingDock />
     </>
   );
 }

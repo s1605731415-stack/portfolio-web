@@ -42,13 +42,13 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 text-white sm:px-7 sm:pt-7">
       <div className="mx-auto flex max-w-[1800px] items-center justify-between">
         <Link className="group flex items-center gap-3" href="/#top" aria-label={copy.brand}>
-          <span className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-[radial-gradient(circle_at_35%_25%,#baffd9,#38ff9c_35%,#03140b_72%)] text-lg font-black text-black shadow-[0_0_30px_rgba(56,255,156,.22)]">
+          <span className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-[radial-gradient(circle_at_35%_25%,#e8fff5,#8ed9be_36%,#06100d_78%)] text-lg font-black text-black shadow-[0_0_30px_rgba(142,217,190,.18)]">
             S
           </span>
           <span className="hidden text-sm font-black tracking-[-0.03em] text-white/86 transition group-hover:text-white sm:block">
             {copy.brand}
           </span>
-          <span className="hidden rounded-full bg-[#38ff9c] px-2 py-1 text-[10px] font-black text-black sm:block">
+          <span className="hidden rounded-full bg-[var(--accent)] px-2 py-1 text-[10px] font-black text-black sm:block">
             {language === "zh" ? "可持续迭代" : "iterating"}
           </span>
         </Link>
@@ -57,7 +57,7 @@ export function Header() {
           <a className="text-white" href="#top">
             {language === "zh" ? "舞台" : "stage"}
           </a>
-          <span className="h-1.5 w-1.5 rounded-full bg-[#38ff9c]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
           <a className="transition hover:text-white" href="#work">
             {language === "zh" ? "列表" : "list"}
           </a>
@@ -69,7 +69,7 @@ export function Header() {
               <button
                 aria-label={`Switch language to ${item}`}
                 className={`rounded-full px-3 py-2 text-xs font-black transition ${
-                  language === item ? "bg-[#38ff9c] text-black" : "text-white/58 hover:text-white"
+                  language === item ? "bg-[var(--accent)] text-black" : "text-white/58 hover:text-white"
                 }`}
                 key={item}
                 onClick={() => setLanguage(item)}

@@ -4,14 +4,14 @@
 
 :root {
   color-scheme: dark;
-  --bg: #050505;
-  --bg-strong: #0b0b0b;
+  --bg: #020202;
+  --bg-strong: #080808;
   --text: #f5f5f0;
   --muted: #a8a8a1;
   --soft: #171717;
   --line: rgba(245, 245, 240, 0.14);
-  --accent: #38ff9c;
-  --accent-2: #d8fff0;
+  --accent: #8ed9be;
+  --accent-2: #dfeee8;
   --surface: rgba(10, 10, 10, 0.72);
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
 }
@@ -24,8 +24,8 @@
   --muted: #a9a9a6;
   --soft: #1d1d1d;
   --line: #383838;
-  --accent: #fafafa;
-  --accent-2: #cfcfca;
+  --accent: #8ed9be;
+  --accent-2: #dfeee8;
   --surface: rgba(10, 10, 10, 0.88);
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
@@ -41,7 +41,7 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 50% -10%, rgba(56, 255, 156, 0.08), transparent 32rem),
+    radial-gradient(circle at 50% -10%, rgba(142, 217, 190, 0.065), transparent 34rem),
     var(--bg);
   color: var(--text);
   font-family: Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -73,18 +73,84 @@ a {
 
 .stage-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(circle at center, black, transparent 72%);
+    linear-gradient(rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.038) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black, transparent 76%);
 }
 
 .noise-overlay {
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px);
-  background-size: 7px 7px, 11px 11px;
-  opacity: 0.1;
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.11) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px),
+    radial-gradient(circle at 45% 70%, rgba(142, 217, 190, 0.08) 0 1px, transparent 1px);
+  background-size: 7px 7px, 11px 11px, 17px 17px;
+  opacity: 0.12;
+}
+
+.cinematic-vignette {
+  background:
+    radial-gradient(circle at 62% 38%, rgba(255, 255, 255, 0.075), transparent 31rem),
+    radial-gradient(circle at 18% 72%, rgba(142, 217, 190, 0.05), transparent 26rem),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.74), transparent 32%, rgba(0, 0, 0, 0.62)),
+    radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.82));
+}
+
+.scanline-overlay {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 6px;
+  opacity: 0.18;
+}
+
+.corner-mark {
+  position: absolute;
+  z-index: 1;
+  width: 72px;
+  height: 72px;
+  border-left: 1px solid rgba(255, 255, 255, 0.23);
+  border-top: 1px solid rgba(255, 255, 255, 0.23);
+}
+
+.low-poly-core::before,
+.low-poly-core::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.low-poly-core::before {
+  background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(142, 217, 190, 0.18), transparent 21rem);
+  filter: blur(4px);
+}
+
+.low-poly-core::after {
+  background-image:
+    radial-gradient(circle at 22% 34%, rgba(255, 255, 255, 0.55) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 26%, rgba(255, 255, 255, 0.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 84% 68%, rgba(142, 217, 190, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 31% 81%, rgba(255, 255, 255, 0.32) 0 1px, transparent 2px);
+}
+
+@keyframes slowSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes coreFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
 }
 
 .light-grid {

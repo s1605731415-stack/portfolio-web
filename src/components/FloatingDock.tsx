@@ -23,7 +23,7 @@ export function FloatingDock() {
       <div className="flex items-end gap-1">
         {projects.slice(0, 5).map((project, index) => (
           <a
-            className={`block overflow-hidden rounded-xl border transition hover:h-16 hover:w-16 ${index === 0 ? "h-14 w-14 border-[#38ff9c]" : "h-11 w-12 border-white/12"}`}
+            className={`block overflow-hidden rounded-xl border transition hover:h-16 hover:w-16 ${index === 0 ? "h-14 w-14 border-[var(--accent)]" : "h-11 w-12 border-white/12"}`}
             href={`/work/${project.slug}`}
             key={project.slug}
           >
@@ -31,7 +31,7 @@ export function FloatingDock() {
           </a>
         ))}
       </div>
-      <a className="rounded-full bg-[#38ff9c] px-4 py-3 text-xs font-black text-black" href="#work">
+      <a className="rounded-full bg-[var(--accent)] px-4 py-3 text-xs font-black text-black" href="#work">
         {copy.dock.visit}
       </a>
       <div className="flex rounded-full bg-white/8 p-1">

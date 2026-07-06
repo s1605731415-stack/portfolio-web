@@ -70,7 +70,7 @@ export function HeroPreviewCluster() {
       <div className="absolute inset-0 stage-grid" />
       <div className="absolute inset-0 noise-overlay" />
       <div className="absolute inset-x-0 top-1/2 h-[38rem] -translate-y-1/2 rounded-full border border-white/8" />
-      <div className="absolute inset-x-[8%] top-[48%] h-[28rem] -translate-y-1/2 rounded-full border border-[#38ff9c]/10" />
+      <div className="absolute inset-x-[8%] top-[48%] h-[28rem] -translate-y-1/2 rounded-full border border-[var(--accent)]/10" />
 
       {projects.map((project, index) => {
         const projectCopy = getProjectCopy(project, language);
@@ -84,7 +84,7 @@ export function HeroPreviewCluster() {
             <img className="aspect-[16/9] w-full object-cover grayscale-[20%] transition duration-500 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/12 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
-              <p className="text-xs font-black uppercase text-[#38ff9c]">{String(index + 1).padStart(2, "0")} / {project.year}</p>
+              <p className="text-xs font-black uppercase text-[var(--accent)]">{String(index + 1).padStart(2, "0")} / {project.year}</p>
               <h3 className="mt-1 text-[clamp(1.15rem,2vw,2rem)] font-black leading-none tracking-[-0.06em] text-white">
                 {projectCopy.title}
               </h3>
@@ -100,13 +100,13 @@ export function HeroPreviewCluster() {
           <span className="absolute bottom-1 left-9">2025</span>
           <span className="absolute left-0 top-14 -rotate-90">show reel</span>
         </div>
-        <img className="absolute left-8 top-8 h-20 w-20 rounded-2xl border border-[#38ff9c]/60 object-cover" src={projects[0].media.thumb} alt="" />
+        <img className="absolute left-8 top-8 h-20 w-20 rounded-2xl border border-[var(--accent)]/60 object-cover" src={projects[0].media.thumb} alt="" />
       </div>
 
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-end gap-2 rounded-full border border-white/10 bg-black/42 p-2 backdrop-blur-md">
         {projects.slice(0, 5).map((project, index) => (
           <a
-            className={`h-14 w-12 overflow-hidden rounded-xl border object-cover transition hover:h-20 hover:w-16 ${index === 0 ? "border-[#38ff9c]" : "border-white/12"}`}
+            className={`h-14 w-12 overflow-hidden rounded-xl border object-cover transition hover:h-20 hover:w-16 ${index === 0 ? "border-[var(--accent)]" : "border-white/12"}`}
             data-reel-card
             href={`/work/${project.slug}`}
             key={project.slug}
