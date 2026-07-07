@@ -16,6 +16,12 @@ export type Project = {
     hero: string;
     thumb: string;
     alt: string;
+    beforeAfter?: {
+      before: string;
+      after: string;
+      beforeAlt: string;
+      afterAlt: string;
+    };
   };
   caseStudy: CaseStudySection[];
 };

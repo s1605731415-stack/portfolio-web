@@ -10,6 +10,7 @@ import { CaseStudyProgress } from "./CaseStudyProgress";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { useLanguage } from "./LanguageProvider";
+import { BeforeAfterSlider } from "./motion/BeforeAfterSlider";
 import { Tag } from "./ui";
 
 const sectionLabels: Record<string, { zh: string; en: string }> = {
@@ -170,6 +171,22 @@ export function CaseStudyLayout({ project }: { project: Project }) {
                 </div>
                 <img className="aspect-[16/8] w-full rounded-[0.55rem] object-cover" src={project.media.hero} alt={project.media.alt} />
               </div>
+
+              {project.media.beforeAfter ? (
+                <div className="max-w-[1200px] rounded-[0.8rem] bg-black p-4 text-white" data-case-media>
+                  <h2 className="mb-4 text-[28px] font-medium uppercase leading-[1.15]">
+                    {language === "zh" ? "改版前后对比" : "Before / After"}
+                  </h2>
+                  <BeforeAfterSlider
+                    after={project.media.beforeAfter.after}
+                    afterAlt={project.media.beforeAfter.afterAlt}
+                    before={project.media.beforeAfter.before}
+                    beforeAlt={project.media.beforeAfter.beforeAlt}
+                    afterLabel={language === "zh" ? "改版后" : "After"}
+                    beforeLabel={language === "zh" ? "改版前" : "Before"}
+                  />
+                </div>
+              ) : null}
             </div>
           </section>
         </article>

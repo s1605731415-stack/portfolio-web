@@ -4,11 +4,22 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../data/projects";
+import type { Project } from "../data/projects";
 import { getProjectCopy, uiCopy } from "../data/translations";
 import { registerGSAP, gsap } from "../lib/gsap";
 import { motionTokens } from "../lib/motionTokens";
 import { useLanguage } from "./LanguageProvider";
 import { TiltCard } from "./motion/TiltCard";
+
+const projectFilters = [
+  { id: "all", zh: "全部", en: "All" },
+  { id: "ai", zh: "AI 工作流", en: "AI Workflow" },
+  { id: "health", zh: "健康 App", en: "Health App" },
+  { id: "frontend", zh: "Web / 前端", en: "Web / Frontend" },
+  { id: "system", zh: "产品系统", en: "Product System" },
+] as const;
+
+type ProjectFilter = (typeof projectFilters)[number]["id"];
 
 export function SelectedWorkSection() {
   const { language } = useLanguage();
@@ -17,6 +28,8 @@ export function SelectedWorkSection() {
   const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeFilter, setActiveFilter] = useState<ProjectFilter>("all");
+  const displayedProjects = projects.filter((project) => matchFilter(project, activeFilter));
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -40,6 +53,8 @@ export function SelectedWorkSection() {
           return;
         }
 
+        setActiveIndex(0);
+        gsap.set(track, { x: 0 });
         const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 96);
         const tween = gsap.to(track, {
           x: () => -distance(),
@@ -53,7 +68,7 @@ export function SelectedWorkSection() {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
-              setActiveIndex(Math.round(self.progress * (projects.length - 1)));
+              setActiveIndex(Math.round(self.progress * (displayedProjects.length - 1)));
             },
           },
         });
@@ -63,7 +78,7 @@ export function SelectedWorkSection() {
     );
 
     return () => mm.revert();
-  }, []);
+  }, [displayedProjects.length]);
 
   return (
     <section id="work" data-section="work" className="relative overflow-hidden border-t border-white/10 bg-[#020202] text-white" ref={sectionRef}>
@@ -84,10 +99,31 @@ export function SelectedWorkSection() {
             </div>
             <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-white/58 sm:text-[16px]">{copy.selectedWorkDescription}</p>
           </div>
+          <div className="flex flex-col gap-3 border border-white/10 bg-white/[0.035] p-4 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between">
+            <p className="text-[13px] font-normal text-white/52">
+              {language === "zh" ? "你想先看哪类能力？" : "What do you want to explore first?"}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {projectFilters.map((filter) => (
+                <button
+                  className={`border px-3 py-2 text-[12px] font-medium uppercase transition ${
+                    activeFilter === filter.id
+                      ? "border-[var(--accent)] bg-[var(--accent)] text-black"
+                      : "border-white/12 bg-black/28 text-white/58 hover:border-white/30 hover:text-white"
+                  }`}
+                  key={filter.id}
+                  onClick={() => setActiveFilter(filter.id)}
+                  type="button"
+                >
+                  {language === "zh" ? filter.zh : filter.en}
+                </button>
+              ))}
+            </div>
+          </div>
 
           <div className="hidden items-center overflow-visible lg:flex">
             <div className="flex gap-8 will-change-transform" ref={trackRef}>
-              {projects.map((project, index) => (
+              {displayedProjects.map((project, index) => (
                 <ProjectExhibitionCard
                   active={activeIndex === index}
                   index={index}
@@ -100,7 +136,7 @@ export function SelectedWorkSection() {
           </div>
 
           <div className="grid gap-6 lg:hidden">
-            {projects.map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <ProjectMobileCard index={index} key={project.slug} language={language} project={project} />
             ))}
           </div>
@@ -119,7 +155,7 @@ function ProjectExhibitionCard({
   active: boolean;
   index: number;
   language: "zh" | "en";
-  project: (typeof projects)[number];
+  project: Project;
 }) {
   const projectCopy = getProjectCopy(project, language);
 
@@ -173,7 +209,7 @@ function ProjectMobileCard({
 }: {
   index: number;
   language: "zh" | "en";
-  project: (typeof projects)[number];
+  project: Project;
 }) {
   const projectCopy = getProjectCopy(project, language);
 
@@ -189,4 +225,25 @@ function ProjectMobileCard({
       </div>
     </Link>
   );
+}
+
+function matchFilter(project: Project, filter: ProjectFilter) {
+  if (filter === "all") {
+    return true;
+  }
+
+  const haystack = `${project.title} ${project.type} ${project.summary} ${project.tags.join(" ")}`.toLowerCase();
+  if (filter === "ai") {
+    return haystack.includes("ai") || haystack.includes("prompt") || haystack.includes("workflow");
+  }
+  if (filter === "health") {
+    return haystack.includes("health") || haystack.includes("awak");
+  }
+  if (filter === "frontend") {
+    return haystack.includes("web") || haystack.includes("frontend") || haystack.includes("website");
+  }
+  if (filter === "system") {
+    return haystack.includes("system") || haystack.includes("platform") || haystack.includes("product");
+  }
+  return true;
 }

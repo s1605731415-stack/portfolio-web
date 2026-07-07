@@ -9,6 +9,7 @@ import { motionTokens } from "../lib/motionTokens";
 import { HeroProjectWall } from "./HeroProjectWall";
 import { useLanguage } from "./LanguageProvider";
 import { MagneticButton } from "./motion/MagneticButton";
+import { HeroCanvas } from "./visual/HeroCanvas";
 
 export function HeroSection() {
   const { language } = useLanguage();
@@ -40,6 +41,7 @@ export function HeroSection() {
       ref={ref}
     >
       <div className="absolute inset-0 cinematic-vignette" />
+      <HeroCanvas />
       <div className="absolute inset-0 stage-grid opacity-50" />
       <div className="absolute inset-0 scanline-overlay" />
       <div className="absolute inset-0 noise-overlay" />
