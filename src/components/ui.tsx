@@ -10,9 +10,9 @@ type ButtonLinkProps = {
 
 export function ButtonLink({ href, children, variant = "primary" }: ButtonLinkProps) {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-lg px-5 text-sm font-extrabold tracking-[-0.03em] transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]";
+    "inline-flex min-h-11 items-center justify-center rounded-sm px-5 text-[13px] font-medium transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]";
   const variants = {
-    primary: "bg-[var(--text)] text-[var(--bg)] hover:-translate-y-0.5 hover:shadow-card",
+    primary: "bg-[var(--text)] text-[var(--bg)] hover:-translate-y-0.5",
     secondary:
       "border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:-translate-y-0.5 hover:border-[var(--text)]",
     ghost: "text-[var(--muted)] hover:bg-[var(--soft)] hover:text-[var(--text)]",
@@ -41,16 +41,16 @@ export function SectionShell({
   className?: string;
 }) {
   return (
-    <section id={id} data-section={id} className={`mx-auto w-full scroll-mt-28 max-w-[1800px] border-t border-[var(--line)] px-6 py-20 sm:px-10 lg:py-28 ${className}`}>
+    <section id={id} data-section={id} className={`mx-auto w-full scroll-mt-28 max-w-[1280px] border-t border-[var(--line)] px-6 py-20 sm:px-8 lg:py-32 ${className}`}>
       <GsapReveal>
         <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-          <div className="max-w-4xl">
-            {eyebrow ? <p className="mb-3 text-sm font-black uppercase text-[var(--accent)]">{eyebrow}</p> : null}
-            <h2 className="text-[clamp(2.8rem,7vw,7rem)] font-black uppercase leading-[0.88] tracking-[-0.07em] text-[var(--text)]">
+          <div className="max-w-3xl">
+            {eyebrow ? <p className="mb-3 text-[12px] font-medium uppercase text-[var(--accent)]">{eyebrow}</p> : null}
+            <h2 className="text-[32px] font-medium uppercase leading-[1.08] text-[var(--text)] sm:text-[44px] lg:text-[56px]">
               {title}
             </h2>
           </div>
-          {description ? <p className="max-w-xl text-base font-bold leading-7 text-[var(--muted)] sm:text-lg">{description}</p> : null}
+          {description ? <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-[var(--muted)] sm:text-[16px]">{description}</p> : null}
         </div>
       </GsapReveal>
       <GsapReveal>{children}</GsapReveal>
@@ -60,7 +60,7 @@ export function SectionShell({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-md border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-xs font-extrabold uppercase tracking-[-0.02em] text-[var(--muted)]">
+    <span className="inline-flex items-center rounded-sm border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-[11px] font-medium uppercase text-[var(--muted)]">
       {children}
     </span>
   );

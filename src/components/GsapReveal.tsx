@@ -1,12 +1,9 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ReactNode } from "react";
 import { useRef } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { registerGSAP, gsap } from "../lib/gsap";
 
 export function GsapReveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,6 +15,7 @@ export function GsapReveal({ children, className = "" }: { children: ReactNode; 
         return;
       }
 
+      registerGSAP();
       gsap.fromTo(
         element,
         { autoAlpha: 0, y: 28 },

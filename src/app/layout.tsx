@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LanguageProvider } from "../components/LanguageProvider";
+import { CursorGlow } from "../components/motion/CursorGlow";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +12,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <CursorGlow />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -40,22 +40,38 @@ export const workflowSteps = [
   {
     title: "Research",
     description: "Frame the product question, map users and scenarios, and turn scattered material into useful design inputs.",
+    prompt: "Summarize user goals, constraints, and risk points from interview notes.",
+    output: "Research themes, opportunity areas, and first product assumptions.",
   },
   {
-    title: "Prompt",
-    description: "Use AI prompts to explore flows, rewrite UX copy, compare structures, and make assumptions visible.",
+    title: "Information Architecture",
+    description: "Organize tasks, content groups, navigation, and decision paths before drawing screens.",
+    prompt: "Compare three IA models for a health insight app and identify trade-offs.",
+    output: "Sitemap, entry points, primary task paths, and naming principles.",
+  },
+  {
+    title: "Wireframe",
+    description: "Translate information hierarchy into low-fidelity flows that can be reviewed quickly.",
+    prompt: "Draft screen-level wireframe requirements for onboarding, dashboard, and insight review.",
+    output: "Flow skeletons, layout priorities, and interaction checkpoints.",
+  },
+  {
+    title: "UI Exploration",
+    description: "Explore visual systems, component behavior, spacing, and responsive rules with restraint.",
+    prompt: "Generate three visual directions using calm health data, editorial AI tool, and graphite system moods.",
+    output: "Visual direction, type scale, components, and image treatment rules.",
   },
   {
     title: "Prototype",
-    description: "Translate direction into interface systems, responsive screens, and front-end-ready component thinking.",
+    description: "Test motion, states, task completion, and content clarity before committing to build details.",
+    prompt: "Create usability questions for checking whether the dashboard feels actionable.",
+    output: "Clickable prototype, state notes, and UX issues to resolve.",
   },
   {
-    title: "Test",
-    description: "Check clarity, task completion, content hierarchy, and handoff risks before polishing visual details.",
-  },
-  {
-    title: "Handoff",
+    title: "Frontend Handoff",
     description: "Document states, tokens, edge cases, and interaction rules so the product can be built consistently.",
+    prompt: "Convert design decisions into component props, states, and responsive acceptance criteria.",
+    output: "Build-ready handoff notes, token map, and interaction rules.",
   },
 ];
 

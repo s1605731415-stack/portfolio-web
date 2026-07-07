@@ -12,9 +12,9 @@ export function ProductBuilderSection() {
     <SectionShell id="builder" title={copy.builderTitle} description={copy.builderDescription}>
       <div className="grid gap-5 lg:grid-cols-3">
         {["Problem judgment", "Interface logic", "Delivery awareness"].map((title) => (
-          <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-6 shadow-soft" key={title}>
-            <h3 className="text-xl font-semibold">{title}</h3>
-            <p className="mt-3 leading-7 text-[var(--muted)]">
+          <div className="rounded-sm border border-[var(--line)] bg-[var(--surface)] p-6" key={title}>
+            <h3 className="text-[22px] font-medium">{title}</h3>
+            <p className="mt-3 text-[15px] font-normal leading-[1.65] text-[var(--muted)]">
               {title === "Problem judgment"
                 ? "Define what needs to be solved before choosing the interface pattern."
                 : title === "Interface logic"
