@@ -10,12 +10,12 @@ type ButtonLinkProps = {
 
 export function ButtonLink({ href, children, variant = "primary" }: ButtonLinkProps) {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-sm px-5 text-[13px] font-medium transition focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]";
+    "poster-micro inline-flex min-h-11 items-center justify-center px-5 transition focus:outline-none focus:ring-2 focus:ring-[var(--color-paper)] focus:ring-offset-2 focus:ring-offset-[var(--color-black)]";
   const variants = {
-    primary: "bg-[var(--text)] text-[var(--bg)] hover:-translate-y-0.5",
+    primary: "bg-[var(--color-paper)] text-[var(--color-ink)] hover:-translate-y-0.5",
     secondary:
-      "border border-[var(--line)] bg-[var(--surface)] text-[var(--text)] hover:-translate-y-0.5 hover:border-[var(--text)]",
-    ghost: "text-[var(--muted)] hover:bg-[var(--soft)] hover:text-[var(--text)]",
+      "border border-white/18 bg-transparent text-white/72 hover:-translate-y-0.5 hover:border-white/44 hover:text-white",
+    ghost: "text-white/58 hover:bg-white/8 hover:text-white",
   };
 
   return (
@@ -41,16 +41,16 @@ export function SectionShell({
   className?: string;
 }) {
   return (
-    <section id={id} data-section={id} className={`mx-auto w-full scroll-mt-28 max-w-[1280px] border-t border-[var(--line)] px-6 py-20 sm:px-8 lg:py-32 ${className}`}>
+    <section id={id} data-section={id} className={`mx-auto w-full scroll-mt-28 max-w-[1280px] border-t border-white/10 px-6 py-20 text-white sm:px-8 lg:py-32 ${className}`}>
       <GsapReveal>
         <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
-            {eyebrow ? <p className="mb-3 text-[12px] font-medium uppercase text-[var(--accent)]">{eyebrow}</p> : null}
-            <h2 className="text-[32px] font-medium uppercase leading-[1.08] text-[var(--text)] sm:text-[44px] lg:text-[56px]">
+            {eyebrow ? <p className="poster-micro mb-3 text-white/44">{eyebrow}</p> : null}
+            <h2 className="poster-display text-[42px] uppercase leading-[0.95] text-white sm:text-[64px] lg:text-[82px]">
               {title}
             </h2>
           </div>
-          {description ? <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-[var(--muted)] sm:text-[16px]">{description}</p> : null}
+          {description ? <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-white/62 sm:text-[16px]">{description}</p> : null}
         </div>
       </GsapReveal>
       <GsapReveal>{children}</GsapReveal>
@@ -60,7 +60,7 @@ export function SectionShell({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-sm border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-[11px] font-medium uppercase text-[var(--muted)]">
+    <span className="poster-micro inline-flex items-center border border-[var(--color-ink)]/16 bg-transparent px-3 py-1 text-[var(--color-muted)]">
       {children}
     </span>
   );

@@ -10,6 +10,10 @@ import { registerGSAP, gsap } from "../lib/gsap";
 import { motionTokens } from "../lib/motionTokens";
 import { useLanguage } from "./LanguageProvider";
 import { TiltCard } from "./motion/TiltCard";
+import { ArchiveMeta } from "./visual/ArchiveMeta";
+import { BarcodeMark } from "./visual/BarcodeMark";
+import { ImageMask } from "./visual/ImageMask";
+import { StarGlyph } from "./visual/StarGlyph";
 
 const projectFilters = [
   { id: "all", zh: "全部", en: "All" },
@@ -81,7 +85,7 @@ export function SelectedWorkSection() {
   }, [displayedProjects.length]);
 
   return (
-    <section id="work" data-section="work" className="relative overflow-hidden border-t border-white/10 bg-[#020202] text-white" ref={sectionRef}>
+    <section id="work" data-section="work" className="relative overflow-hidden border-t border-white/10 bg-[var(--color-black)] text-white" ref={sectionRef}>
       <div className="pointer-events-none absolute inset-0 cinematic-vignette" />
       <div className="pointer-events-none absolute inset-0 noise-overlay" />
 
@@ -89,27 +93,28 @@ export function SelectedWorkSection() {
         <div className="grid gap-8 py-10 lg:h-screen lg:grid-rows-[auto_1fr] lg:py-24">
           <div className="grid gap-6 lg:grid-cols-[0.8fr_1fr] lg:items-end">
             <div>
-              <p className="mb-4 flex items-center gap-3 text-[12px] font-medium uppercase text-white/48">
-                <span className="h-px w-12 bg-[var(--accent)]" />
-                {language === "zh" ? "作品展览" : "featured exhibition"}
+              <p className="poster-micro mb-4 flex items-center gap-3 text-white/48">
+                <span className="h-px w-12 bg-white/36" />
+                {language === "zh" ? "作品展览 / 影像档案" : "featured exhibition / motion archive"}
               </p>
-              <h2 className="max-w-2xl text-[32px] font-medium uppercase leading-[1.05] text-white sm:text-[48px] lg:text-[56px]">
+              <h2 className="poster-display max-w-2xl text-[46px] uppercase leading-[0.94] text-white sm:text-[68px] lg:text-[84px]">
                 {copy.selectedWorkTitle}
               </h2>
             </div>
-            <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-white/58 sm:text-[16px]">{copy.selectedWorkDescription}</p>
+            <p className="max-w-[680px] text-[15px] font-normal leading-[1.7] text-white/62 sm:text-[16px]">{copy.selectedWorkDescription}</p>
           </div>
-          <div className="flex flex-col gap-3 border border-white/10 bg-white/[0.035] p-4 backdrop-blur-md lg:flex-row lg:items-center lg:justify-between">
-            <p className="text-[13px] font-normal text-white/52">
+
+          <div className="flex flex-col gap-3 bg-[var(--color-paper)] p-4 text-[var(--color-ink)] shadow-[0_22px_70px_rgba(0,0,0,.35)] lg:flex-row lg:items-center lg:justify-between">
+            <p className="poster-micro text-[var(--color-muted)]">
               {language === "zh" ? "你想先看哪类能力？" : "What do you want to explore first?"}
             </p>
             <div className="flex flex-wrap gap-2">
               {projectFilters.map((filter) => (
                 <button
-                  className={`border px-3 py-2 text-[12px] font-medium uppercase transition ${
+                  className={`poster-micro border px-3 py-2 transition ${
                     activeFilter === filter.id
-                      ? "border-[var(--accent)] bg-[var(--accent)] text-black"
-                      : "border-white/12 bg-black/28 text-white/58 hover:border-white/30 hover:text-white"
+                      ? "border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-paper)]"
+                      : "border-[var(--color-ink)]/14 bg-transparent text-[var(--color-muted)] hover:border-[var(--color-ink)]/45 hover:text-[var(--color-ink)]"
                   }`}
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
@@ -162,41 +167,76 @@ function ProjectExhibitionCard({
   return (
     <Link className="group block shrink-0" href={`/work/${project.slug}`}>
       <TiltCard
-        className={`relative w-[72vw] max-w-[820px] overflow-hidden border bg-black transition duration-500 [transform-style:preserve-3d] ${
-          active ? "scale-100 border-white/30 opacity-100" : "scale-[0.94] border-white/10 opacity-55"
+        className={`relative w-[74vw] max-w-[880px] overflow-hidden bg-[var(--color-paper)] p-5 text-[var(--color-ink)] shadow-[0_34px_100px_rgba(0,0,0,.5)] transition duration-500 [transform-style:preserve-3d] ${
+          active ? "scale-100 opacity-100" : "scale-[0.94] opacity-58"
         }`}
         maxTilt={motionTokens.tilt.card}
       >
-        <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_var(--tilt-x)_var(--tilt-y),rgba(142,217,190,.16),transparent_18rem)] opacity-0 transition group-hover:opacity-100" />
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <img className="h-full w-full object-cover opacity-84 grayscale transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.62),transparent_52%,rgba(0,0,0,.58))]" />
-          <div className="absolute left-5 top-5 flex items-center gap-3 text-[12px] font-medium uppercase text-white/72">
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <span className="h-px w-9 bg-white/28" />
-            <span>{project.year}</span>
+        <span aria-hidden="true" className="paper-texture pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute inset-x-6 top-5 z-20 flex items-center justify-between text-[var(--color-ink)]">
+          <BarcodeMark />
+          <StarGlyph />
+          <BarcodeMark />
+        </div>
+        <div className="pointer-events-none absolute -right-8 top-1/2 hidden -translate-y-1/2 rotate-90 poster-micro text-[var(--color-muted)] lg:block">
+          SUN WANG / CASE STUDY / {project.year}
+        </div>
+
+        <div className="relative z-10 grid min-h-[560px] gap-5 pt-9 lg:grid-cols-[78px_1fr_160px]">
+          <div className="poster-micro hidden border-r border-[var(--color-ink)]/10 pr-4 text-[var(--color-muted)] lg:grid">
+            {["01", "02", "03", "04", "05", "06", "07", "08", "09"].map((item) => (
+              <span key={item}>{item}</span>
+            ))}
           </div>
-          <ArrowUpRight className="absolute right-5 top-5 text-white/52 transition group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--accent)]" size={21} />
-          <div className="absolute bottom-0 left-0 right-0 p-6">
-            <p className="mb-3 max-w-[560px] text-[12px] font-medium uppercase leading-[1.55] text-white/56">{projectCopy.type}</p>
-            <h3 className="max-w-[680px] text-[24px] font-medium uppercase leading-[1.08] text-white sm:text-[28px]">
-              {projectCopy.title}
-            </h3>
-            <p className="mt-4 max-w-[640px] text-[15px] font-normal leading-[1.65] text-white/0 transition group-hover:text-white/66">{projectCopy.summary}</p>
-            <div className="mt-5 flex items-center justify-between gap-4">
-              <div className="flex flex-wrap gap-2">
+
+          <div className="grid gap-4">
+            <ImageMask variant={index % 2 === 0 ? "ticket" : "arch"} className="min-h-[290px] border border-[var(--color-ink)]/10 lg:min-h-[350px]">
+              <img className="h-full min-h-[290px] w-full object-cover grayscale transition duration-700 group-hover:scale-[1.045] group-hover:grayscale-0 lg:min-h-[350px]" src={project.media.hero} alt={project.media.alt} />
+            </ImageMask>
+            <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="poster-micro text-[var(--color-muted)]">
+                  {String(index + 1).padStart(2, "0")} / {project.year} / {projectCopy.type}
+                </p>
+                <h3 className="poster-display mt-2 max-w-[680px] text-[42px] uppercase leading-[0.95] text-[var(--color-ink)] sm:text-[58px] lg:text-[68px]">
+                  {projectCopy.title}
+                </h3>
+              </div>
+              <span className="inline-flex h-12 w-12 items-center justify-center border border-[var(--color-ink)] text-[var(--color-ink)] transition group-hover:-translate-y-1 group-hover:translate-x-1">
+                <ArrowUpRight size={22} />
+              </span>
+            </div>
+          </div>
+
+          <div className="hidden content-between gap-5 lg:grid">
+            <ArchiveMeta label="TYPE" value={projectCopy.type} />
+            <div className="poster-micro text-[var(--color-muted)]">
+              <p>{projectCopy.summary}</p>
+              <div className="mt-5 grid gap-2">
                 {projectCopy.tags.slice(0, 3).map((tag) => (
-                  <span className="border border-white/14 bg-black/36 px-3 py-2 text-[11px] font-medium uppercase text-white/62" key={tag}>
+                  <span className="border-t border-[var(--color-ink)]/12 pt-2" key={tag}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <span className="translate-y-2 text-[12px] font-medium uppercase text-[var(--accent)] opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
-                {language === "zh" ? "查看案例" : "View Case Study"}
-              </span>
             </div>
+            <span className="poster-micro translate-y-2 text-[var(--color-ink)] opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
+              {language === "zh" ? "查看案例" : "View Case Study"}
+            </span>
           </div>
         </div>
+
+        <div className="pointer-events-none absolute bottom-5 left-0 right-0 hidden justify-center poster-micro text-[var(--color-muted)] lg:flex">
+          <span className="max-w-[420px] rotate-[-4deg] text-center">{language === "zh" ? "项目像一张暂停的影像票据" : "Project as a paused cinematic ticket"}</span>
+        </div>
+        <div className="mt-5 flex flex-wrap gap-2 lg:hidden">
+          {projectCopy.tags.slice(0, 3).map((tag) => (
+            <span className="poster-micro border border-[var(--color-ink)]/14 px-3 py-2 text-[var(--color-muted)]" key={tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-[15px] leading-[1.65] text-[var(--color-muted)] lg:hidden">{projectCopy.summary}</p>
       </TiltCard>
     </Link>
   );
@@ -214,14 +254,20 @@ function ProjectMobileCard({
   const projectCopy = getProjectCopy(project, language);
 
   return (
-    <Link className="group block border border-white/12 bg-black" href={`/work/${project.slug}`}>
-      <img className="aspect-[16/10] w-full object-cover opacity-88 grayscale transition group-active:scale-[0.985]" src={project.media.hero} alt={project.media.alt} />
-      <div className="p-5">
-        <p className="text-[12px] font-medium uppercase text-white/50">
+    <Link className="group block bg-[var(--color-paper)] p-4 text-[var(--color-ink)] shadow-[0_24px_80px_rgba(0,0,0,.45)]" href={`/work/${project.slug}`}>
+      <div className="mb-4 flex items-center justify-between">
+        <BarcodeMark />
+        <StarGlyph />
+      </div>
+      <ImageMask className="border border-[var(--color-ink)]/10" variant={index % 2 === 0 ? "ticket" : "arch"}>
+        <img className="aspect-[16/10] w-full object-cover grayscale transition group-active:scale-[0.985]" src={project.media.hero} alt={project.media.alt} />
+      </ImageMask>
+      <div className="pt-5">
+        <p className="poster-micro text-[var(--color-muted)]">
           {String(index + 1).padStart(2, "0")} / {project.year}
         </p>
-        <h3 className="mt-3 text-[24px] font-medium uppercase leading-[1.15] text-white">{projectCopy.title}</h3>
-        <p className="mt-3 text-[15px] font-normal leading-[1.65] text-white/62">{projectCopy.summary}</p>
+        <h3 className="poster-display mt-3 text-[34px] uppercase leading-[0.98] text-[var(--color-ink)]">{projectCopy.title}</h3>
+        <p className="mt-3 text-[15px] font-normal leading-[1.65] text-[var(--color-muted)]">{projectCopy.summary}</p>
       </div>
     </Link>
   );

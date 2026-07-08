@@ -4,6 +4,22 @@
 
 :root {
   color-scheme: dark;
+  --color-black: #050505;
+  --color-black-soft: #0a0a0a;
+  --color-paper: #f2f0ea;
+  --color-paper-warm: #edeae3;
+  --color-paper-light: #f7f5ef;
+  --color-ink: #151515;
+  --color-ink-soft: #2a2926;
+  --color-muted: #66615a;
+  --color-faint: #9a958c;
+  --color-red: #9e1f1f;
+  --color-blue-muted: #214e63;
+  --color-gold-muted: #b49a63;
+  --color-green-muted: #3e4b38;
+  --font-display: Georgia, "Times New Roman", "Songti SC", "STSong", serif;
+  --font-script: "Snell Roundhand", "Brush Script MT", "Times New Roman", cursive;
+  --font-mono: "IBM Plex Mono", "Space Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, monospace;
   --bg: #020202;
   --bg-strong: #080808;
   --text: #f5f5f0;
@@ -41,8 +57,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 50% -10%, rgba(142, 217, 190, 0.065), transparent 34rem),
-    var(--bg);
+    radial-gradient(circle at 50% -10%, rgba(242, 240, 234, 0.065), transparent 34rem),
+    var(--color-black);
   color: var(--text);
   font-family: Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
@@ -201,6 +217,188 @@ img {
   background: radial-gradient(circle, rgba(142, 217, 190, 0.14), rgba(255, 255, 255, 0.035) 34%, transparent 66%);
   mix-blend-mode: screen;
   opacity: 0.72;
+}
+
+.poster-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.poster-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.poster-micro {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.poster-link {
+  position: relative;
+  color: currentColor;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.poster-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+.poster-link:hover,
+.poster-link:focus-visible {
+  transform: translateY(-1px);
+}
+
+.poster-link:hover::after,
+.poster-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.poster-panel {
+  border-radius: 34px;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.45);
+}
+
+.ticket-notch {
+  position: absolute;
+  z-index: 5;
+  display: block;
+  background: var(--color-black);
+  pointer-events: none;
+}
+
+.ticket-notch-top,
+.ticket-notch-bottom {
+  left: 50%;
+  width: 92px;
+  height: 46px;
+  border-radius: 0 0 999px 999px;
+  transform: translateX(-50%);
+}
+
+.ticket-notch-top {
+  top: -1px;
+}
+
+.ticket-notch-bottom {
+  bottom: -1px;
+  border-radius: 999px 999px 0 0;
+}
+
+.ticket-notch-left,
+.ticket-notch-right {
+  top: 49%;
+  width: 58px;
+  height: 116px;
+  border-radius: 0 999px 999px 0;
+  transform: translateY(-50%);
+}
+
+.ticket-notch-left {
+  left: -1px;
+}
+
+.ticket-notch-right {
+  right: -1px;
+  border-radius: 999px 0 0 999px;
+}
+
+.paper-texture {
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(21, 21, 21, 0.22) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 42%, rgba(21, 21, 21, 0.16) 0 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.035) 1px, transparent 1px);
+  background-size: 9px 9px, 13px 13px, 42px 42px;
+  mix-blend-mode: multiply;
+}
+
+.barcode-mark {
+  background:
+    linear-gradient(90deg,
+      currentColor 0 3px,
+      transparent 3px 7px,
+      currentColor 7px 9px,
+      transparent 9px 13px,
+      currentColor 13px 18px,
+      transparent 18px 22px,
+      currentColor 22px 24px,
+      transparent 24px 31px,
+      currentColor 31px 35px,
+      transparent 35px 39px,
+      currentColor 39px 41px,
+      transparent 41px 47px,
+      currentColor 47px 53px,
+      transparent 53px 57px,
+      currentColor 57px 60px,
+      transparent 60px 66px,
+      currentColor 66px 69px,
+      transparent 69px 74px,
+      currentColor 74px 82px,
+      transparent 82px 86px,
+      currentColor 86px 89px,
+      transparent 89px 100%);
+}
+
+.star-glyph {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.image-mask img {
+  filter: contrast(1.05) saturate(0.85) brightness(0.95);
+}
+
+.image-mask-ticket {
+  border-radius: 28px;
+}
+
+.image-mask-arch {
+  border-radius: 999px 999px 24px 24px;
+}
+
+.image-mask-poster {
+  border-radius: 8px;
+}
+
+.halftone-overlay {
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.42) 0 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.14) 1px, transparent 1px);
+  background-size: 5px 5px, 100% 4px;
+  mix-blend-mode: overlay;
+}
+
+.ornament-ring {
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  display: inline-grid;
+  height: 68px;
+  place-items: center;
+  width: 68px;
+}
+
+.ornament-ring span {
+  max-width: 48px;
+  text-align: center;
 }
 
 @media (max-width: 767px) {

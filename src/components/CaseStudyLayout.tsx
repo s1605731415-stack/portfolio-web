@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BarChart3, X } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, BarChart3, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Project } from "../data/projects";
@@ -11,7 +11,10 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { useLanguage } from "./LanguageProvider";
 import { BeforeAfterSlider } from "./motion/BeforeAfterSlider";
-import { Tag } from "./ui";
+import { ArchiveMeta } from "./visual/ArchiveMeta";
+import { BarcodeMark } from "./visual/BarcodeMark";
+import { ImageMask } from "./visual/ImageMask";
+import { StarGlyph } from "./visual/StarGlyph";
 
 const sectionLabels: Record<string, { zh: string; en: string }> = {
   Overview: { zh: "背景", en: "Overview" },
@@ -83,112 +86,135 @@ export function CaseStudyLayout({ project }: { project: Project }) {
     <>
       <CaseStudyProgress />
       <Header />
-      <main className="bg-[#050505] px-3 pb-8 pt-24 text-black sm:px-6 sm:pt-28">
-        <article className="light-grid relative mx-auto min-h-screen max-w-[1280px] overflow-hidden rounded-[1rem] bg-[#f4f4ef] px-5 pb-24 pt-7 shadow-[0_28px_90px_rgba(0,0,0,.42)] sm:px-8 lg:px-12">
-          <Link className="inline-flex items-center gap-2 text-[13px] font-medium text-black/64 transition hover:text-black" href="/#work">
-            <ArrowLeft size={17} />
-            {copy.back}
-          </Link>
-          <Link
-            className="absolute right-5 top-5 grid h-12 w-12 place-items-center rounded-full bg-black text-white transition hover:scale-105 sm:right-8 sm:top-7"
-            href="/#work"
-            aria-label={copy.back}
-          >
-            <X size={20} />
-          </Link>
-
-          <section className="mt-12 grid items-center gap-10 lg:grid-cols-[0.62fr_1fr]">
-            <div>
-              <p className="mb-6 flex items-center gap-3 text-[13px] font-medium text-black/58">
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-                {project.year} / {projectCopy.type}
-              </p>
-              <h1 className="max-w-[720px] text-[38px] font-medium uppercase leading-[1.02] sm:text-[52px] lg:text-[64px]">
-                {projectCopy.title}
-              </h1>
-              <p className="mt-6 max-w-[720px] text-[16px] font-normal leading-[1.75] text-black/58">{projectCopy.summary}</p>
-              <div className="mt-7 flex flex-wrap gap-2">
-                {projectCopy.tags.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
+      <main className="bg-[var(--color-black)] px-3 pb-8 pt-24 text-[var(--color-ink)] sm:px-6 sm:pt-28">
+        <article className="relative mx-auto max-w-[1280px] overflow-hidden bg-[var(--color-paper)] px-5 pb-24 pt-7 shadow-[0_34px_100px_rgba(0,0,0,.5)] sm:px-8 lg:px-12">
+          <span aria-hidden="true" className="paper-texture pointer-events-none absolute inset-0" />
+          <div className="relative z-10">
+            <div className="flex items-start justify-between gap-4">
+              <Link className="poster-micro inline-flex items-center gap-2 text-[var(--color-muted)] transition hover:text-[var(--color-ink)]" href="/#work">
+                <ArrowLeft size={15} />
+                {copy.back}
+              </Link>
+              <div className="hidden items-center gap-6 text-[var(--color-ink)] sm:flex">
+                <BarcodeMark />
+                <StarGlyph />
+                <BarcodeMark />
               </div>
+              <Link
+                className="grid h-11 w-11 place-items-center bg-[var(--color-ink)] text-[var(--color-paper)] transition hover:scale-105"
+                href="/#work"
+                aria-label={copy.back}
+              >
+                <X size={19} />
+              </Link>
             </div>
 
-            <div className="relative">
-              <div className="rounded-[0.8rem] bg-black/8 p-3 shadow-[0_18px_55px_rgba(0,0,0,.12)]" data-case-media>
-                <img className="aspect-[16/10] w-full rounded-[0.55rem] object-cover" src={project.media.hero} alt={project.media.alt} />
+            <section className="mt-12 grid items-end gap-10 lg:grid-cols-[0.76fr_1fr]">
+              <div>
+                <div className="mb-8 grid grid-cols-3 gap-4 border-y border-[var(--color-ink)]/12 py-4">
+                  <ArchiveMeta label="YEAR" value={project.year} />
+                  <ArchiveMeta label="TYPE" value={projectCopy.type} align="center" />
+                  <ArchiveMeta label="ENTRY" value={project.slug.toUpperCase().slice(0, 12)} align="right" />
+                </div>
+                <p className="poster-script text-[38px] leading-none text-[var(--color-ink-soft)] sm:text-[52px]">
+                  Case Study
+                </p>
+                <h1 className="poster-display mt-3 max-w-[760px] text-[48px] uppercase leading-[0.92] text-[var(--color-ink)] sm:text-[78px] lg:text-[96px]">
+                  {projectCopy.title}
+                </h1>
+                <p className="mt-6 max-w-[720px] text-[16px] font-normal leading-[1.75] text-[var(--color-muted)]">{projectCopy.summary}</p>
+                <div className="mt-7 flex flex-wrap gap-2">
+                  {projectCopy.tags.map((tag) => (
+                    <span className="poster-micro border border-[var(--color-ink)]/16 px-3 py-2 text-[var(--color-muted)]" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="absolute -bottom-6 -left-6 hidden w-48 overflow-hidden rounded-2xl border border-black/10 bg-white/75 p-2 shadow-[0_18px_50px_rgba(0,0,0,.18)] backdrop-blur lg:block">
-                <img className="aspect-[4/3] w-full rounded-xl object-cover" src="/images/projects/case-study-method.png" alt="" />
-              </div>
-              <div className="absolute -right-4 -top-5 hidden rounded-2xl bg-black px-4 py-3 text-sm font-black text-[var(--accent)] shadow-[0_18px_50px_rgba(0,0,0,.28)] sm:block">
-                {language === "zh" ? "继续向下" : "keep scrolling"}
-              </div>
-            </div>
-          </section>
 
-          <section className="mt-24 grid gap-10 lg:grid-cols-[220px_1fr]">
-            <aside className="hidden lg:block">
-              <nav className="sticky top-28 grid gap-2 border-l border-black/10 pl-4 text-[13px]" aria-label={copy.toc}>
-                <p className="mb-3 font-medium uppercase text-black/38">{copy.toc}</p>
-                {sectionCopy.map((section, index) => (
-                  <a
-                    className={`transition ${activeSection === section.title ? "translate-x-1 text-black" : "text-black/42 hover:text-black"}`}
-                    href={`#${section.title.toLowerCase().replaceAll(" ", "-")}`}
-                    key={section.title}
-                  >
-                    {String(index + 1).padStart(2, "0")} / {section.displayTitle}
+              <div className="relative" data-case-media>
+                <ImageMask variant="arch" className="border border-[var(--color-ink)]/10">
+                  <img className="aspect-[4/5] w-full object-cover grayscale" src={project.media.hero} alt={project.media.alt} />
+                </ImageMask>
+                <div className="absolute -bottom-7 left-5 right-5 grid gap-2 bg-[var(--color-ink)] p-4 text-[var(--color-paper)] shadow-[0_20px_60px_rgba(0,0,0,.3)] sm:left-auto sm:w-72">
+                  <p className="poster-micro text-white/54">{language === "zh" ? "阅读方式" : "Reading Mode"}</p>
+                  <a className="poster-micro inline-flex items-center justify-between text-white" href="#overview">
+                    {language === "zh" ? "向下进入案例档案" : "Enter project archive"}
+                    <ArrowUpRight size={15} />
                   </a>
-                ))}
-              </nav>
-            </aside>
-
-            <div className="grid gap-8">
-              {sectionCopy.map((section, index) => {
-                const isOutcome = section.title === "Outcome" || section.title === "Design Decisions";
-                return (
-                  <section
-                    className={`max-w-[720px] scroll-mt-32 rounded-[0.8rem] border p-6 sm:p-7 ${
-                      isOutcome ? "border-black bg-black text-white" : "border-black/10 bg-white/58 text-black backdrop-blur"
-                    }`}
-                    data-case-section={section.title}
-                    id={section.title.toLowerCase().replaceAll(" ", "-")}
-                    key={section.title}
-                  >
-                    <p className={`flex items-center gap-3 text-[13px] font-medium ${isOutcome ? "text-white/48" : "text-black/42"}`}>
-                      <span className="text-[var(--accent)]">{String(index + 1).padStart(2, "0")}</span>
-                      {section.displayTitle}
-                    </p>
-                    <p className={`mt-5 text-[16px] font-normal leading-[1.75] ${isOutcome ? "text-white/68" : "text-black/62"}`}>{section.body}</p>
-                  </section>
-                );
-              })}
-
-              <div className="max-w-[1200px] rounded-[0.8rem] bg-black p-4 text-white" data-case-media>
-                <div className="mb-4 flex items-center gap-3">
-                  <BarChart3 size={18} className="text-[var(--accent)]" />
-                  <h2 className="text-[28px] font-medium uppercase leading-[1.15]">{language === "zh" ? "视觉证据" : "Visual Evidence"}</h2>
                 </div>
-                <img className="aspect-[16/8] w-full rounded-[0.55rem] object-cover" src={project.media.hero} alt={project.media.alt} />
               </div>
+            </section>
 
-              {project.media.beforeAfter ? (
-                <div className="max-w-[1200px] rounded-[0.8rem] bg-black p-4 text-white" data-case-media>
-                  <h2 className="mb-4 text-[28px] font-medium uppercase leading-[1.15]">
-                    {language === "zh" ? "改版前后对比" : "Before / After"}
-                  </h2>
-                  <BeforeAfterSlider
-                    after={project.media.beforeAfter.after}
-                    afterAlt={project.media.beforeAfter.afterAlt}
-                    before={project.media.beforeAfter.before}
-                    beforeAlt={project.media.beforeAfter.beforeAlt}
-                    afterLabel={language === "zh" ? "改版后" : "After"}
-                    beforeLabel={language === "zh" ? "改版前" : "Before"}
-                  />
+            <section className="mt-28 grid gap-10 lg:grid-cols-[240px_1fr]">
+              <aside className="hidden lg:block">
+                <nav className="sticky top-28 grid gap-2 border-l border-[var(--color-ink)]/12 pl-4 poster-micro" aria-label={copy.toc}>
+                  <p className="mb-4 text-[var(--color-faint)]">{copy.toc}</p>
+                  {sectionCopy.map((section, index) => (
+                    <a
+                      className={`transition ${activeSection === section.title ? "translate-x-1 text-[var(--color-ink)]" : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"}`}
+                      href={`#${section.title.toLowerCase().replaceAll(" ", "-")}`}
+                      key={section.title}
+                    >
+                      {String(index + 1).padStart(2, "0")} / {section.displayTitle}
+                    </a>
+                  ))}
+                </nav>
+              </aside>
+
+              <div className="grid gap-7">
+                {sectionCopy.map((section, index) => {
+                  const isOutcome = section.title === "Outcome" || section.title === "Design Decisions";
+                  return (
+                    <section
+                      className={`max-w-[780px] scroll-mt-32 border p-6 sm:p-7 ${
+                        isOutcome ? "border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-paper)]" : "border-[var(--color-ink)]/12 bg-[var(--color-paper-light)] text-[var(--color-ink)]"
+                      }`}
+                      data-case-section={section.title}
+                      id={section.title.toLowerCase().replaceAll(" ", "-")}
+                      key={section.title}
+                    >
+                      <p className={`poster-micro flex items-center gap-3 ${isOutcome ? "text-white/52" : "text-[var(--color-muted)]"}`}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <span className="h-px w-10 bg-current opacity-40" />
+                        {section.displayTitle}
+                      </p>
+                      <p className={`mt-5 text-[16px] font-normal leading-[1.8] ${isOutcome ? "text-white/76" : "text-[var(--color-muted)]"}`}>{section.body}</p>
+                    </section>
+                  );
+                })}
+
+                <div className="max-w-[1200px] bg-[var(--color-ink)] p-4 text-[var(--color-paper)]" data-case-media>
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <BarChart3 size={18} />
+                      <h2 className="poster-display text-[34px] uppercase leading-[0.98]">{language === "zh" ? "视觉证据" : "Visual Evidence"}</h2>
+                    </div>
+                    <BarcodeMark className="hidden opacity-70 sm:inline-block" />
+                  </div>
+                  <ImageMask variant="ticket" className="border border-white/10">
+                    <img className="aspect-[16/8] w-full object-cover" src={project.media.hero} alt={project.media.alt} />
+                  </ImageMask>
                 </div>
-              ) : null}
-            </div>
-          </section>
+
+                {project.media.beforeAfter ? (
+                  <div className="max-w-[1200px] bg-[var(--color-ink)] p-4 text-[var(--color-paper)]" data-case-media>
+                    <h2 className="poster-display mb-4 text-[34px] uppercase leading-[0.98]">
+                      {language === "zh" ? "改版前后对比" : "Before / After"}
+                    </h2>
+                    <BeforeAfterSlider
+                      after={project.media.beforeAfter.after}
+                      afterAlt={project.media.beforeAfter.afterAlt}
+                      before={project.media.beforeAfter.before}
+                      beforeAlt={project.media.beforeAfter.beforeAlt}
+                      afterLabel={language === "zh" ? "改版后" : "After"}
+                      beforeLabel={language === "zh" ? "改版前" : "Before"}
+                    />
+                  </div>
+                ) : null}
+              </div>
+            </section>
+          </div>
         </article>
       </main>
       <Footer />

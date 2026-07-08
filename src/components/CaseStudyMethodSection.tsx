@@ -19,10 +19,13 @@ export function CaseStudyMethodSection() {
     <SectionShell id="method" title={copy.methodTitle} description={copy.methodDescription}>
       <div className="grid gap-4 md:grid-cols-4">
         {methods.map(([title, description], index) => (
-          <div className="rounded-sm border border-[var(--line)] bg-[var(--surface)] p-5" key={title}>
-            <span className="text-[12px] font-medium text-[var(--accent)]">0{index + 1}</span>
-            <h3 className="mt-5 text-[22px] font-medium">{title}</h3>
-            <p className="mt-3 text-[14px] font-normal leading-[1.6] text-[var(--muted)]">{description}</p>
+          <div className="relative overflow-hidden bg-[var(--color-paper)] p-5 text-[var(--color-ink)]" key={title}>
+            <span aria-hidden="true" className="paper-texture pointer-events-none absolute inset-0" />
+            <div className="relative">
+              <span className="poster-micro text-[var(--color-muted)]">0{index + 1}</span>
+              <h3 className="poster-display mt-5 text-[30px] uppercase leading-[0.98]">{title}</h3>
+              <p className="mt-3 text-[14px] font-normal leading-[1.6] text-[var(--color-muted)]">{description}</p>
+            </div>
           </div>
         ))}
       </div>

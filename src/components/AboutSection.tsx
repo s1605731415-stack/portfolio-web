@@ -4,7 +4,6 @@ import { useState } from "react";
 import { uiCopy } from "../data/translations";
 import { useLanguage } from "./LanguageProvider";
 import { SectionShell } from "./ui";
-import { GlassPanel } from "./visual/GlassPanel";
 
 const tools = [
   {
@@ -57,29 +56,29 @@ export function AboutSection() {
   return (
     <SectionShell id="about" title={copy.aboutTitle} description={copy.aboutDescription}>
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <GlassPanel className="p-6 sm:p-8">
-          <p className="max-w-[720px] text-[16px] font-normal leading-[1.75] text-white/66">{copy.aboutBody}</p>
+        <div className="bg-[var(--color-paper)] p-6 text-[var(--color-ink)] sm:p-8">
+          <p className="max-w-[720px] text-[16px] font-normal leading-[1.75] text-[var(--color-muted)]">{copy.aboutBody}</p>
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {[
               language === "zh" ? "产品逻辑" : "Product logic",
               language === "zh" ? "界面系统" : "Interface system",
               language === "zh" ? "前端协作" : "Frontend collaboration",
             ].map((item) => (
-              <div className="border border-white/10 bg-black/28 p-4 text-[13px] font-medium uppercase text-white/58" key={item}>
+              <div className="poster-micro border border-[var(--color-ink)]/12 p-4 text-[var(--color-muted)]" key={item}>
                 {item}
               </div>
             ))}
           </div>
-        </GlassPanel>
+        </div>
 
-        <GlassPanel className="relative overflow-hidden p-5 sm:p-6">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_76%_22%,rgba(142,217,190,.14),transparent_18rem)]" />
+        <div className="relative overflow-hidden bg-[var(--color-ink)] p-5 text-[var(--color-paper)] sm:p-6">
+          <div className="pointer-events-none absolute inset-0 noise-overlay opacity-70" />
           <div className="relative grid gap-5">
             <div>
-              <p className="text-[12px] font-medium uppercase text-[var(--accent)]">
+              <p className="poster-micro text-white/48">
                 {language === "zh" ? "工具不是清单，是工作流" : "Tools as workflow, not a checklist"}
               </p>
-              <h3 className="mt-3 text-[28px] font-medium uppercase leading-[1.12] text-white">{activeTool.name}</h3>
+              <h3 className="poster-display mt-3 text-[44px] uppercase leading-[0.98] text-white">{activeTool.name}</h3>
               <p className="mt-3 max-w-[620px] text-[15px] font-normal leading-[1.65] text-white/62">
                 {language === "zh" ? activeTool.zh : activeTool.en}
               </p>
@@ -88,9 +87,9 @@ export function AboutSection() {
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {tools.map((tool, index) => (
                 <button
-                  className={`min-h-16 border p-3 text-left text-[12px] font-medium uppercase transition ${
+                  className={`poster-micro min-h-16 border p-3 text-left transition ${
                     activeTool.name === tool.name
-                      ? "border-[var(--accent)] bg-[var(--accent)] text-black"
+                      ? "border-white bg-white text-black"
                       : "border-white/10 bg-black/28 text-white/58 hover:-translate-y-1 hover:border-white/28 hover:text-white"
                   }`}
                   key={tool.name}
@@ -104,7 +103,7 @@ export function AboutSection() {
               ))}
             </div>
           </div>
-        </GlassPanel>
+        </div>
       </div>
     </SectionShell>
   );
