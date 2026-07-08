@@ -1,6 +1,7 @@
 "use client";
 
 import { Pause, X } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { projects } from "../data/projects";
 import { uiCopy } from "../data/translations";
@@ -27,7 +28,7 @@ export function FloatingDock() {
             href={`/work/${project.slug}`}
             key={project.slug}
           >
-            <img className="h-full w-full object-cover" src={project.media.thumb} alt="" />
+            <Image className="h-full w-full object-cover" src={project.media.thumb} alt="" width={80} height={80} sizes="64px" />
           </a>
         ))}
       </div>

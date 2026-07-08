@@ -1,6 +1,7 @@
 "use client";
 
 import gsap from "gsap";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { projects } from "../data/projects";
@@ -81,7 +82,7 @@ export function HeroPreviewCluster() {
             href={`/work/${project.slug}`}
             key={project.slug}
           >
-            <img className="aspect-[16/9] w-full object-cover grayscale-[20%] transition duration-500 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} />
+            <Image className="aspect-[16/9] w-full object-cover grayscale-[20%] transition duration-500 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} width={900} height={506} sizes="34vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/12 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
               <p className="text-xs font-black uppercase text-[var(--accent)]">{String(index + 1).padStart(2, "0")} / {project.year}</p>
@@ -100,7 +101,7 @@ export function HeroPreviewCluster() {
           <span className="absolute bottom-1 left-9">2025</span>
           <span className="absolute left-0 top-14 -rotate-90">show reel</span>
         </div>
-        <img className="absolute left-8 top-8 h-20 w-20 rounded-2xl border border-[var(--accent)]/60 object-cover" src={projects[0].media.thumb} alt="" />
+        <Image className="absolute left-8 top-8 h-20 w-20 rounded-2xl border border-[var(--accent)]/60 object-cover" src={projects[0].media.thumb} alt="" width={80} height={80} sizes="80px" />
       </div>
 
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-end gap-2 rounded-full border border-white/10 bg-black/42 p-2 backdrop-blur-md">
@@ -111,7 +112,7 @@ export function HeroPreviewCluster() {
             href={`/work/${project.slug}`}
             key={project.slug}
           >
-            <img className="h-full w-full object-cover" src={project.media.thumb} alt="" />
+            <Image className="h-full w-full object-cover" src={project.media.thumb} alt="" width={96} height={112} sizes="64px" />
           </a>
         ))}
       </div>

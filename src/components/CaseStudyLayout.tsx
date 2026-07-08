@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowUpRight, BarChart3, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Project } from "../data/projects";
@@ -134,7 +135,7 @@ export function CaseStudyLayout({ project }: { project: Project }) {
 
               <div className="relative" data-case-media>
                 <ImageMask variant="arch" className="border border-[var(--color-ink)]/10">
-                  <img className="aspect-[4/5] w-full object-cover grayscale" src={project.media.hero} alt={project.media.alt} />
+                  <Image className="aspect-[4/5] w-full object-cover grayscale" src={project.media.hero} alt={project.media.alt} width={900} height={1125} priority sizes="(min-width: 1024px) 48vw, 92vw" />
                 </ImageMask>
                 <div className="absolute -bottom-7 left-5 right-5 grid gap-2 bg-[var(--color-ink)] p-4 text-[var(--color-paper)] shadow-[0_20px_60px_rgba(0,0,0,.3)] sm:left-auto sm:w-72">
                   <p className="poster-micro text-white/54">{language === "zh" ? "阅读方式" : "Reading Mode"}</p>
@@ -193,7 +194,7 @@ export function CaseStudyLayout({ project }: { project: Project }) {
                     <BarcodeMark className="hidden opacity-70 sm:inline-block" />
                   </div>
                   <ImageMask variant="ticket" className="border border-white/10">
-                    <img className="aspect-[16/8] w-full object-cover" src={project.media.hero} alt={project.media.alt} />
+                    <Image className="aspect-[16/8] w-full object-cover" src={project.media.hero} alt={project.media.alt} width={1200} height={600} sizes="(min-width: 1024px) 70vw, 92vw" />
                   </ImageMask>
                 </div>
 

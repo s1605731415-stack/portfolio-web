@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../data/projects";
@@ -191,7 +192,7 @@ function ProjectExhibitionCard({
 
           <div className="grid gap-4">
             <ImageMask variant={index % 2 === 0 ? "ticket" : "arch"} className="min-h-[290px] border border-[var(--color-ink)]/10 lg:min-h-[350px]">
-              <img className="h-full min-h-[290px] w-full object-cover grayscale transition duration-700 group-hover:scale-[1.045] group-hover:grayscale-0 lg:min-h-[350px]" src={project.media.hero} alt={project.media.alt} />
+              <Image className="h-full min-h-[290px] w-full object-cover grayscale transition duration-700 group-hover:scale-[1.045] group-hover:grayscale-0 lg:min-h-[350px]" src={project.media.hero} alt={project.media.alt} width={1200} height={760} sizes="(min-width: 1024px) 44vw, 92vw" />
             </ImageMask>
             <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
@@ -260,7 +261,7 @@ function ProjectMobileCard({
         <StarGlyph />
       </div>
       <ImageMask className="border border-[var(--color-ink)]/10" variant={index % 2 === 0 ? "ticket" : "arch"}>
-        <img className="aspect-[16/10] w-full object-cover grayscale transition group-active:scale-[0.985]" src={project.media.hero} alt={project.media.alt} />
+        <Image className="aspect-[16/10] w-full object-cover grayscale transition group-active:scale-[0.985]" src={project.media.hero} alt={project.media.alt} width={900} height={560} sizes="92vw" />
       </ImageMask>
       <div className="pt-5">
         <p className="poster-micro text-[var(--color-muted)]">

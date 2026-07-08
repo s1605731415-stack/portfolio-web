@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { projects } from "../data/projects";
@@ -82,7 +83,7 @@ export function HeroProjectWall() {
             href={`/work/${project.slug}`}
             key={project.slug}
           >
-            <img className="aspect-[16/10] w-full object-cover opacity-78 grayscale transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} />
+            <Image className="aspect-[16/10] w-full object-cover opacity-78 grayscale transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 group-hover:grayscale-0" src={project.media.hero} alt={project.media.alt} width={900} height={562} sizes="(min-width: 1024px) 40vw, 80vw" />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,.74))]" />
             <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
               <span className="max-w-[15rem] text-[11px] font-medium uppercase leading-tight text-white/80">{project.title}</span>

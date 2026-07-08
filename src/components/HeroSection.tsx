@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { projects } from "../data/projects";
 import { uiCopy } from "../data/translations";
@@ -79,13 +80,13 @@ export function HeroSection() {
               </div>
 
               <ImageMask variant="ticket" className="min-h-[330px] border border-[var(--color-ink)]/10 lg:min-h-[420px]">
-                <img className="h-full min-h-[330px] w-full object-cover lg:min-h-[420px]" src={featured[0].media.hero} alt={featured[0].media.alt} />
+                <Image className="h-full min-h-[330px] w-full object-cover lg:min-h-[420px]" src={featured[0].media.hero} alt={featured[0].media.alt} width={1200} height={760} priority sizes="(min-width: 1024px) 42vw, 92vw" />
               </ImageMask>
 
               <div className="hidden gap-4 lg:grid">
                 {featured.slice(1, 2).map((project, index) => (
                   <ImageMask className="border border-[var(--color-ink)]/10" key={project.slug} variant={index === 0 ? "arch" : "poster"}>
-                    <img className="aspect-[4/5] w-full object-cover" src={project.media.hero} alt={project.media.alt} />
+                    <Image className="aspect-[4/5] w-full object-cover" src={project.media.hero} alt={project.media.alt} width={720} height={900} sizes="24vw" />
                   </ImageMask>
                 ))}
               </div>

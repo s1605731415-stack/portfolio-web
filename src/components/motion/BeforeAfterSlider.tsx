@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { PointerEvent } from "react";
 import { useState } from "react";
 
@@ -36,9 +37,11 @@ export function BeforeAfterSlider({
         }
       }}
     >
-      <img className="h-full w-full object-cover" src={after} alt={afterAlt} />
+      <Image className="object-cover" src={after} alt={afterAlt} fill sizes="(min-width: 1024px) 900px, 92vw" />
       <div className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${position}%` }}>
-        <img className="h-full w-[calc(100vw-2rem)] max-w-none object-cover md:w-[900px]" src={before} alt={beforeAlt} />
+        <div className="relative h-full w-[calc(100vw-2rem)] max-w-none md:w-[900px]">
+          <Image className="object-cover" src={before} alt={beforeAlt} fill sizes="(min-width: 1024px) 900px, 92vw" />
+        </div>
       </div>
       <div className="absolute inset-y-0 w-px bg-white" style={{ left: `${position}%` }}>
         <span className="absolute left-1/2 top-1/2 grid h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/30 bg-black/70 text-xs text-white backdrop-blur">
